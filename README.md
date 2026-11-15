@@ -1,7 +1,7 @@
 # CRIME TRACK-X
 
 **Police FIR & Criminal Management System**  
-Diploma Final Year Project · Django web application
+ Django web application
 
 Crime Track-X is being converted from the existing Python/MySQL console application into a responsive browser-based records workspace. The original main.py, console MVC modules, and database/schema.sql are retained. The Django app uses its own models and, by default, a separate MySQL database named crimetrack_x_web; it does not modify the console database.
 
