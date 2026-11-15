@@ -1,0 +1,50 @@
+from django.contrib import admin
+from django.contrib.auth.views import PasswordChangeDoneView
+from django.urls import path
+from accounts import views as account_views
+from records import views as record_views
+from reports import views as report_views
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", record_views.dashboard, name="dashboard"),
+    path("accounts/login/", account_views.login_view, name="login"),
+    path("accounts/logout/", account_views.logout_view, name="logout"),
+    path("accounts/users/", account_views.user_list, name="user_list"),
+    path("accounts/users/new/", account_views.user_create, name="user_create"),
+    path("accounts/users/<int:user_id>/edit/", account_views.user_update, name="user_update"),
+    path("accounts/users/<int:user_id>/password/", account_views.user_password_reset, name="user_password_reset"),
+    path("accounts/users/<int:user_id>/toggle/", account_views.user_toggle, name="user_toggle"),
+    path("accounts/password/", account_views.password_change, name="password_change"),
+    path("accounts/password/done/", PasswordChangeDoneView.as_view(template_name="accounts/password_done.html"), name="password_change_done"),
+    path("firs/", record_views.fir_list, name="fir_list"),
+    path("firs/new/", record_views.fir_create, name="fir_create"),
+    path("firs/<int:pk>/", record_views.fir_detail, name="fir_detail"),
+    path("firs/<int:pk>/edit/", record_views.fir_update, name="fir_update"),
+    path("firs/<int:pk>/delete/", record_views.fir_delete, name="fir_delete"),
+    path("firs/<int:pk>/people/", record_views.fir_person_add, name="fir_person_add"),
+    path("criminals/", record_views.criminal_list, name="criminal_list"),
+    path("criminals/new/", record_views.criminal_create, name="criminal_create"),
+    path("criminals/<int:pk>/", record_views.criminal_detail, name="criminal_detail"),
+    path("criminals/<int:pk>/edit/", record_views.criminal_update, name="criminal_update"),
+    path("criminals/<int:pk>/delete/", record_views.criminal_delete, name="criminal_delete"),
+    path("officers/", record_views.officer_list, name="officer_list"),
+    path("officers/new/", record_views.officer_create, name="officer_create"),
+    path("officers/<int:pk>/edit/", record_views.officer_update, name="officer_update"),
+    path("stations/", record_views.station_list, name="station_list"),
+    path("stations/new/", record_views.station_create, name="station_create"),
+    path("stations/<int:pk>/edit/", record_views.station_update, name="station_update"),
+    path("investigations/", record_views.case_list, name="case_list"),
+    path("investigations/new/", record_views.case_create, name="case_create"),
+    path("investigations/<int:pk>/", record_views.case_detail, name="case_detail"),
+    path("investigations/<int:pk>/edit/", record_views.case_update, name="case_update"),
+    path("investigations/<int:pk>/notes/", record_views.note_create, name="note_create"),
+    path("investigations/<int:pk>/evidence/", record_views.evidence_create, name="evidence_create"),
+    path("evidence/<int:pk>/status/", record_views.evidence_update, name="evidence_update"),
+    path("reports/", report_views.report_home, name="report_home"),
+    path("reports/firs.csv", report_views.fir_csv, name="fir_csv"),
+    path("reports/persons.csv", report_views.criminal_csv, name="criminal_csv"),
+    path("reports/investigations.csv", report_views.case_csv, name="case_csv"),
+    path("reports/officers.csv", report_views.officer_csv, name="officer_csv"),
+    path("reports/audit/", report_views.audit_list, name="audit_list"),
+]
